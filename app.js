@@ -12,7 +12,8 @@ const App = {
           {title: 'Роутер', text: 'В данном блоке вы узнаете все о том, как работает мультиязычность во Vue. Мы создадим миниклон Gmail в данном блоке, где вы на практике увидите как работать с динамическим роутером.'},
           {title: 'Vuex', text: 'В блоке вы узнаете абсолютно все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Все на практике.'},
           {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'},
-        ]
+        ],
+        isResetActive: false
       }
     },
     methods: {
@@ -21,22 +22,32 @@ const App = {
         // когда нажимаем кнопку назад
       },
       reset() {
+        this.isResetActive = false
+        this.activeIndex = 0
         // начать заного
       },
       nextOfFinish() {
-        this.activeIndex++
+        if(this.activeIndex < this.steps.length - 1) {
+          this.activeIndex++
+        } else {
+          this.isResetActive = true
+        }
         // кнопка вперед или закончить
       },
       setActive(idx) {
+        this.activeIndex = idx
         // когда нажимаем на определенный шаг
       }
     },
     computed: {
-        isLastStep() {
-            return this.steps.length - 1 === this.activeIndex
+        currentStep() {
+          return this.steps[this.activeIndex]
         },
         isPrevDisabled() {
             return this.activeIndex === 0
+        },
+        isLastStep() {
+            return this.steps.length - 1 === this.activeIndex
         }
       // тут стоит определить несколько свойств:
       // 1. текущий выбранный шаг
