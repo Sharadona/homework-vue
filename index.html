@@ -23,16 +23,19 @@
               active: i === activeIndex,
               done: i < activeIndex
             }
-            
           ">
-            <span>{{i+1}}</span>
+            <span @click="setActive(i)">{{i+1}}</span>
             {{step.title}}
           </li>
         </ul>
         <div>
-          <button class="btn" @click="prev" :disabled="isPrevDisabled">Назад</button>
-          <button class="btn primary" @click="nextOfFinish" v-if="!isLastStep">Вперед</button>
-          <button class="btn primary" v-else>Закончить</button>
+          <div v-if="!isResetActive">
+            <button class="btn" @click="prev()" :disabled="isPrevDisabled">Назад</button>
+            <button class="btn primary" @click="nextOfFinish()">
+              {{ isLastStep ? 'Закончить' : 'Вперёд'}}
+            </button>
+          </div>
+          <button class="btn" @click="reset()" v-else>Начать заного</button>
         </div>
       </div>
     </div>
