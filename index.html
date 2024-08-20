@@ -14,17 +14,16 @@
 
       <div class="steps">
         <div class="steps-content">
-          Сюда необходимо вывести текст активного шага по его индексу
+          {{currentStep.text}}
         </div>
         <ul class="steps-list">
-          <!-- <li class="steps-item active"><span>1</span> Шаг 1</li>
-          <li class="steps-item "><span>2</span> Шаг 2</li>
-          <li class="steps-item "><span>3</span> Шаг 3</li>
-          <li class="steps-item"><span>4</span> Шаг 4</li> -->
           <li class="steps-item" 
-          v-for:="(step, i) in steps" 
-          :class="{active: i === activeIndex}
-          
+            v-for:="(step, i) in steps" 
+            :class="{
+              active: i === activeIndex,
+              done: i < activeIndex
+            }
+            
           ">
             <span>{{i+1}}</span>
             {{step.title}}

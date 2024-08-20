@@ -32,11 +32,14 @@ const App = {
       }
     },
     computed: {
-        isLastStep() {
-            return this.steps.length - 1 === this.activeIndex
+        currentStep() {
+          return this.steps[this.activeIndex]
         },
         isPrevDisabled() {
             return this.activeIndex === 0
+        },
+        isLastStep() {
+            return this.steps.length - 1 === this.activeIndex
         }
       // тут стоит определить несколько свойств:
       // 1. текущий выбранный шаг
